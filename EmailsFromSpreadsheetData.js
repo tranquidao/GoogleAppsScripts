@@ -27,3 +27,21 @@ function emailFromSpreadsheet() {
   }
    
 }
+
+function getHiddenAndFilteredRows() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var data = sheet.getDataRange().getValues();
+  for (var d = 0; d < data.length; d++) {
+    // Row Index starts from 1
+    if (sheet.isRowHiddenByFilter(d + 1)) {
+      Logger.log('Row #' + d + ' is filtered - value: ' + data[d][0]);
+      continue;
+    }
+    // Row Index starts from 1
+    if (sheet.isRowHiddenByUser(d + 1)) {
+      Logger.log('Row #' + d + ' is hidden - value: ' + data[d][0]);
+      continue;
+    }
+    // processRow(d)
+  }
+}
